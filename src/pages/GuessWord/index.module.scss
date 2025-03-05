@@ -1,0 +1,88 @@
+.container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top:30px
+}
+
+.actionButtons {
+  position: absolute;
+  top:20px;
+  right: 20px;
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modeCards {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 60%;
+}
+
+.modeCard {
+  padding: 8px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.speakCard {
+  margin-right: 16px;
+}
+
+.actionCard {
+  margin-left: 4px;
+}
+
+.activeMode {
+  background: #FF6B6B;
+  color:#fff;
+}
+
+.wordCard {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 32px;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  :global(.ant-card-body) {
+    padding: 48px 24px;
+  }
+}
+
+.wordContent {
+  font-size: 60px;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.timerSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  :global(.ant-input-number) {
+    width: 80px;
+  }
+
+  button {
+    width: 140px;
+  }
+
+}
