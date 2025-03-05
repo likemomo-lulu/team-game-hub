@@ -37,7 +37,7 @@ const GuessWord: React.FC = () => {
     setCurrentWord(word);
     setHistory((prev) => [
       { mode: gameMode, word },
-      ...prev.slice(0, 9),
+      ...prev.slice(0, 19),
     ]);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % words.length);
   };
@@ -128,7 +128,6 @@ const GuessWord: React.FC = () => {
           renderItem={(item) => (
             <List.Item>
               <List.Item.Meta
-                title={item.mode === 'speak' ? '你说我猜' : '你划我猜'}
                 description={item.word}
               />
             </List.Item>
