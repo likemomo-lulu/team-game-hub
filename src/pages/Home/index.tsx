@@ -19,14 +19,20 @@ const Home: React.FC = () => {
       description: '经典的团队猜词游戏，支持你说我猜和你划我猜两种模式',
       image: '/team-game-hub/images/guess-word.png',
     },
+    {
+      id: 'add-word',
+      title: '加字游戏',
+      description: '主持人给出一个词，参与者依次添加1个字，形成逻辑通顺的句子',
+      image: '/team-game-hub/images/add-word.png',
+    },
   ];
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>快乐星球始发站</h1>
-      <Row gutter={[24, 24]} className={styles.gameList}>
+      <Row gutter={[24, 24]} justify="start" align="stretch" className={styles.gameList}>
         {games.map((game) => (
-          <Col key={game.id} xs={24} sm={12} md={8} lg={6}>
+          <Col key={game.id} xs={24} sm={12} md={12} lg={6}>
             <Card
               hoverable
               cover={

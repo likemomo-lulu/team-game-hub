@@ -95,7 +95,7 @@ const GuessWord: React.FC = () => {
       
       <Card className={styles.wordCard}>
         <div className={styles.wordContent}>
-          {currentWord || '准备'}
+          {currentWord || '点击按钮开始游戏'}
         </div>
       </Card>
 
