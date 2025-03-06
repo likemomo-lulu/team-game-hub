@@ -1,9 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import Home from '../pages/Home';
 import TruthOrDare from '../pages/TruthOrDare';
 import GuessWord from '../pages/GuessWord';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Home />,
@@ -16,8 +16,6 @@ const router = createBrowserRouter([
     path: '/guess-word',
     element: <GuessWord />,
   },
-], {
-  basename: '/team-game-hub'
-});
+]);
 
 export default router;
