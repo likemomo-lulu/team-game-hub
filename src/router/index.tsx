@@ -16,6 +16,8 @@ const router = createBrowserRouter([
     path: '/guess-word',
     element: <GuessWord />,
   },
-]);
+], {
+  basename: '/team-game-hub'
+});
 
 export default router;

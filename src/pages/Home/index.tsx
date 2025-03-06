@@ -11,13 +11,13 @@ const Home: React.FC = () => {
       id: 'truth-or-dare',
       title: '真心话大冒险',
       description: '一个有趣的团队互动游戏，让大家更好地了解彼此',
-      image: '/images/truth-or-dare.png',
+      image: '/team-game-hub/images/truth-or-dare.png',
     },
     {
       id: 'guess-word',
       title: '你划我猜',
       description: '经典的团队猜词游戏，支持你说我猜和你划我猜两种模式',
-      image: '/images/guess-word.png',
+      image: '/team-game-hub/images/guess-word.png',
     },
   ];
 
