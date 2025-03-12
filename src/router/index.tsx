@@ -3,6 +3,7 @@ import Home from '../pages/Home';
 import TruthOrDare from '../pages/TruthOrDare';
 import GuessWord from '../pages/GuessWord';
 import AddWord from '../pages/AddWord';
+import Teams from '../pages/Teams';
 
 const router = createHashRouter([
   {
@@ -20,6 +21,10 @@ const router = createHashRouter([
   {
     path: '/add-word',
     element: <AddWord />,
+  },
+  {
+    path: '/teams',
+    element: <Teams />,
   },
 ]);
 

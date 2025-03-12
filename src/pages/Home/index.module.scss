@@ -8,8 +8,16 @@
   text-align: center;
   font-size: 32px;
   margin-top: 16px;
-  margin-bottom: 56px;
+  margin-bottom: 32px;
   color: #222222;
+}
+
+.tabs {
+  margin-bottom: 24px;
+  
+  :global(.ant-tabs-nav) {
+    margin-bottom: 24px;
+  }
 }
 
 .gameList {

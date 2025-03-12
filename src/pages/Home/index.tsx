@@ -1,11 +1,13 @@
-import React from 'react';
-import { Card, Row, Col } from 'antd';
+import React, { useState } from 'react';
+import { Card, Row, Col, Tabs } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { Gamepad, Users } from 'lucide-react';
+import Teams from '../Teams';
 import styles from './index.module.scss';
 
-const Home: React.FC = () => {
+const GamesTab: React.FC = () => {
   const navigate = useNavigate();
-
+  
   const games = [
     {
       id: 'truth-or-dare',
@@ -28,8 +30,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>快乐星球始发站</h1>
+    <div>
       <Row gutter={[24, 24]} justify="start" align="stretch" className={styles.gameList}>
         {games.map((game) => (
           <Col key={game.id} xs={24} sm={12} md={12} lg={6}>
@@ -48,6 +49,43 @@ const Home: React.FC = () => {
           </Col>
         ))}
       </Row>
+    </div>
+  );
+};
+
+const Home: React.FC = () => {
+  const items = [
+    {
+      key: 'games',
+      label: (
+        <span>
+          <Gamepad size={16} style={{ marginRight: '8px' }} />
+          游戏
+        </span>
+      ),
+      children: <GamesTab />,
+    },
+    {
+      key: 'teams',
+      label: (
+        <span>
+          <Users size={16} style={{ marginRight: '8px' }} />
+          团队
+        </span>
+      ),
+      children: <Teams />,
+    },
+  ];
+
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>快乐星球始发站</h1>
+      <Tabs
+        defaultActiveKey="games"
+        items={items}
+        className={styles.tabs}
+        size="large"
+      />
     </div>
   );
 };
