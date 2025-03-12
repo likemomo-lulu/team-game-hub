@@ -101,6 +101,38 @@ const Teams: React.FC = () => {
       ),
     },
     {
+      title: "总分",
+      key: "total-score",
+      render: (value: any, record: Team, index: number) => {
+        const totalScore = getTotalScore(record);
+        let trophyIcon;
+        let scoreStyle;
+
+        if (index === 0) {
+          trophyIcon = <TrophyOutlined style={{ color: "#FFD700" }} />; // 金色奖杯
+          scoreStyle = { color: "#FFD700", fontWeight: "bold" };
+        } else if (index === 1) {
+          trophyIcon = <TrophyOutlined style={{ color: "#C0C0C0" }} />; // 银色奖杯
+          scoreStyle = { color: "#C0C0C0", fontWeight: "bold" };
+        } else if (index === 2) {
+          trophyIcon = <TrophyOutlined style={{ color: "#CD7F32" }} />; // 铜色奖杯
+          scoreStyle = { color: "#CD7F32", fontWeight: "bold" };
+        } else {
+          trophyIcon = null;
+          scoreStyle = { color: "#666666" };
+        }
+
+        return (
+          <Space>
+            {trophyIcon}
+            <span style={scoreStyle}>{totalScore}</span>
+          </Space>
+        );
+      },
+      sorter: (a: Team, b: Team) => getTotalScore(b) - getTotalScore(a),
+      defaultSortOrder: "descend" as SortOrder,
+    },
+    {
       title: "你划我猜得分",
       dataIndex: ["scores", "guess-word"],
       key: "guess-word-score",
@@ -118,13 +150,6 @@ const Teams: React.FC = () => {
       key: `${gameId}-score`,
       render: (value: any, record: Team) => record.scores[gameId] || 0,
     })),
-    {
-      title: "总分",
-      key: "total-score",
-      render: (value: any, record: Team) => getTotalScore(record),
-      sorter: (a: Team, b: Team) => getTotalScore(b) - getTotalScore(a),
-      defaultSortOrder: "descend" as SortOrder,
-    },
     {
       title: "操作",
       key: "action",
@@ -150,18 +175,18 @@ const Teams: React.FC = () => {
         <Space>
           <Button
             type="primary"
+            icon={<TrophyOutlined />}
+            onClick={() => setIsCustomScoreModalVisible(true)}
+          >
+            添加自定义游戏得分
+          </Button>
+          <Button
+            type="primary"
             icon={<PlusOutlined />}
             onClick={handleAddTeam}
             className={styles.addButton}
           >
             添加团队
-          </Button>
-          <Button
-            type="primary"
-            icon={<TrophyOutlined />}
-            onClick={() => setIsCustomScoreModalVisible(true)}
-          >
-            添加自定义游戏得分
           </Button>
           <Popconfirm
             title="确定要重置所有团队信息吗？"
