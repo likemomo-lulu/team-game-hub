@@ -16,7 +16,7 @@ import {
   RedoOutlined,
   ClockCircleOutlined,
   CheckOutlined,
-  CloseOutlined,
+  StepForwardOutlined ,
 } from "@ant-design/icons";
 import { useTeam } from "../../contexts/TeamContext";
 import styles from "./index.module.scss";
@@ -202,7 +202,7 @@ const GuessWord: React.FC = () => {
               <Button
                 danger
                 size="large"
-                icon={<CloseOutlined />}
+                icon={<StepForwardOutlined  />}
                 onClick={handleSkip}
                 disabled={!currentWord}
               >
