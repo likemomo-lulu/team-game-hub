@@ -5,9 +5,9 @@ export interface Team {
   name: string;
   avatar: string;
   scores: {
-    'guess-word': number;
-    'add-word': number;
-    [key: string]: number;
+    'guess-word'?: number;
+    'add-word'?: number;
+    [key: string]: number | undefined;
   };
 }
 
@@ -19,6 +19,7 @@ interface TeamContextType {
   incrementTeamScore: (teamId: string, gameId: string, increment: number) => void;
   resetTeams: () => void;
   getTotalScore: (team: Team) => number;
+  removeGameScores: (gameId: string) => void;
 }
 
 const TeamContext = createContext<TeamContextType | undefined>(undefined);
@@ -37,7 +38,7 @@ interface TeamProviderProps {
 
 export const TeamProvider: React.FC<TeamProviderProps> = ({ children }) => {
   const getTotalScore = (team: Team): number => {
-    return Object.values(team.scores).reduce((total, score) => total + score, 0);
+    return Object.values(team.scores).reduce<number>((total, score) => total + (score || 0), 0);
   };
 
   const [teams, setTeams] = useState<Team[]>(() => {
@@ -66,12 +67,11 @@ export const TeamProvider: React.FC<TeamProviderProps> = ({ children }) => {
     setTeams((prev) =>
       prev.map((team) => {
         if (team.id === teamId) {
+          const newScores = JSON.parse(JSON.stringify(team.scores));
+          newScores[gameId] = score;
           return {
             ...team,
-            scores: {
-              ...team.scores,
-              [gameId]: score,
-            },
+            scores: newScores,
           };
         }
         return team;
@@ -103,8 +103,22 @@ export const TeamProvider: React.FC<TeamProviderProps> = ({ children }) => {
   
   // 当teams状态变化时，保存到localStorage
   useEffect(() => {
+    console.log('teams---',teams);
     localStorage.setItem('teams', JSON.stringify(teams));
   }, [teams]);
+
+  const removeGameScores = (gameId: string) => {
+    setTeams((prev) =>
+      prev.map((team) => {
+        const newScores = JSON.parse(JSON.stringify(team.scores));
+        delete newScores[gameId];
+        return {
+          ...team,
+          scores: newScores
+        };
+      })
+    );
+  };
 
   return (
     <TeamContext.Provider
@@ -116,6 +130,7 @@ export const TeamProvider: React.FC<TeamProviderProps> = ({ children }) => {
         incrementTeamScore,
         resetTeams,
         getTotalScore,
+        removeGameScores,
       }}
     >
       {children}
