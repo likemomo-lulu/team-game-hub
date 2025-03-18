@@ -7,8 +7,6 @@ import {
   Space,
   Modal,
   Input,
-  Row,
-  Col,
   Avatar,
   InputNumber,
 } from "antd";

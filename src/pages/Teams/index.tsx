@@ -88,9 +88,10 @@ const Teams: React.FC = () => {
       key: "rank",
       render: (value: any, record: Team, index: number) => index + 1,
       width: 80,
+      align: "center" as any,
     },
     {
-      title: "团队",
+      title: <div style={{display:'flex',justifyContent:'center'}}>团队</div>,
       dataIndex: "name",
       key: "name",
       render: (text: string, record: Team) => (
@@ -103,6 +104,7 @@ const Teams: React.FC = () => {
     {
       title: "总分",
       key: "total-score",
+      align: "center" as any,
       render: (value: any, record: Team, index: number) => {
         const totalScore = getTotalScore(record);
         let trophyIcon;
@@ -136,23 +138,27 @@ const Teams: React.FC = () => {
       title: "你划我猜得分",
       dataIndex: ["scores", "guess-word"],
       key: "guess-word-score",
+      align: "center" as any,
       render: (score: number) => score || 0,
     },
     {
       title: "加字游戏得分",
       dataIndex: ["scores", "add-word"],
       key: "add-word-score",
+      align: "center" as any,
       render: (score: number) => score || 0,
     },
     // 动态生成自定义游戏得分列
     ...customGameIds.map((gameId) => ({
       title: `${gameId}得分`,
       key: `${gameId}-score`,
+      align: "center" as any,
       render: (value: any, record: Team) => record.scores[gameId] || 0,
     })),
     {
       title: "操作",
       key: "action",
+      align: "center" as any,
       render: (value: any, record: Team) => (
         <Popconfirm
           title="确定要删除这个团队吗？"
@@ -171,7 +177,7 @@ const Teams: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>团队管理</h1>
+        <h1 className={styles.title}>团队设置</h1>
         <Space>
           <Button
             type="primary"
