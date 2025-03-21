@@ -23,7 +23,7 @@ const GamesTab: React.FC = () => {
     },
     {
       id: 'add-word',
-      title: '加字游戏',
+      title: '词语接力',
       description: '主持人给出一个词，参与者依次添加1个字，形成逻辑通顺的句子',
       image: '/team-game-hub/images/add-word.png',
     },

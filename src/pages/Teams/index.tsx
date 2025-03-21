@@ -137,7 +137,7 @@ const Teams: React.FC = () => {
     },
     // 动态生成游戏得分列
     ...gameIds.map((gameId) => ({
-      title: `${gameId === "guess-word" ? "你划我猜" : gameId === "add-word" ? "加字游戏" : gameId}得分`,
+      title: `${gameId === "guess-word" ? "你划我猜" : gameId === "add-word" ? "词语接力" : gameId}得分`,
       key: `${gameId}-score`,
       align: "center" as any,
       render: (value: any, record: Team) => record.scores[gameId] || 0,
@@ -323,7 +323,7 @@ const Teams: React.FC = () => {
 
         {(isEditMode || editingGameId) && (
           <div>
-            <h4>编辑<span style={{ color: 'red' }}>{editingGameId === 'guess-word' ? '你划我猜' : editingGameId === 'add-word' ? '加字游戏' : editingGameId}</span>游戏得分：</h4>
+            <h4>编辑<span style={{ color: 'red' }}>{editingGameId === 'guess-word' ? '你划我猜' : editingGameId === 'add-word' ? '词语接力' : editingGameId}</span>游戏得分：</h4>
             <List
               dataSource={teams}
               renderItem={(team) => (
@@ -383,7 +383,7 @@ const Teams: React.FC = () => {
             >
               <div style={{ flex: 1 }}>
                 {gameId === "guess-word" ? "你划我猜" : 
-                 gameId === "add-word" ? "加字游戏" : 
+                 gameId === "add-word" ? "词语接力" : 
                  gameId}
               </div>
             </List.Item>

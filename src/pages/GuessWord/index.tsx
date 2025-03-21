@@ -10,17 +10,23 @@ import {
   Col,
   Select,
   Avatar,
+  Modal,
+  Input,
 } from "antd";
 import {
   HistoryOutlined,
   RedoOutlined,
   ClockCircleOutlined,
   CheckOutlined,
-  StepForwardOutlined ,
+  StepForwardOutlined, 
+  EditOutlined,
 } from "@ant-design/icons";
 import { useTeam } from "../../contexts/TeamContext";
 import styles from "./index.module.scss";
 import { actionGuessWords, speakGuessWords } from "../../config";
+
+const defaultSpeakWords = speakGuessWords;
+const defaultActionWords = actionGuessWords;
 
 const GuessWord: React.FC = () => {
   const { teams, incrementTeamScore } = useTeam();
@@ -35,6 +41,15 @@ const GuessWord: React.FC = () => {
   );
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentTeamId, setCurrentTeamId] = useState<string>("");
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [customSpeakWords, setCustomSpeakWords] = useState<string>(
+    defaultSpeakWords.join("\n")
+  );
+  const [customActionWords, setCustomActionWords] = useState<string>(
+    defaultActionWords.join("\n")
+  );
+  const [speakWords, setSpeakWords] = useState<string[]>(defaultSpeakWords);
+  const [actionWords, setActionWords] = useState<string[]>(defaultActionWords);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -47,7 +62,7 @@ const GuessWord: React.FC = () => {
   }, [isCountingDown, timeLeft]);
 
   const handleWordSelect = () => {
-    const words = gameMode === "speak" ? speakGuessWords : actionGuessWords;
+    const words = gameMode === "speak" ? speakWords : actionWords;
     const word = words[currentIndex];
     setCurrentWord(word);
     setHistory((prev) => [{ mode: gameMode, word }, ...prev.slice(0, 19)]);
@@ -78,10 +93,24 @@ const GuessWord: React.FC = () => {
     setHistory([]);
   };
 
+  const handleCustomWordsSubmit = () => {
+    setCurrentIndex(0);
+    setSpeakWords(customSpeakWords.split("\n").filter((w) => w.trim()));
+    setActionWords(customActionWords.split("\n").filter((w) => w.trim()));
+    setIsModalVisible(false);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.topActionButtons}>
-        <Space size="large">
+        <Space size="small">
+        <Button
+            type="link"
+            icon={<EditOutlined />}
+            onClick={() => setIsModalVisible(true)}
+          >
+            自定义题目
+          </Button>
           <Button
             type="link"
             icon={<HistoryOutlined />}
@@ -92,6 +121,7 @@ const GuessWord: React.FC = () => {
           <Button type="link" icon={<RedoOutlined />} onClick={resetHistory}>
             重置记录
           </Button>
+
         </Space>
       </div>
 
@@ -159,7 +189,7 @@ const GuessWord: React.FC = () => {
           </div>
           <Card className={styles.wordCard}>
             <div className={styles.wordContent}>
-              {currentWord || "点击按钮开始游戏"}
+              {currentWord || "点击下一题开始游戏"}
             </div>
           </Card>
           <div className={styles.controls}>
@@ -170,7 +200,7 @@ const GuessWord: React.FC = () => {
                 className={` ${gameMode === "speak" ? styles.activeMode : ""} ${
                   styles.speakCard
                 }`}
-                onClick={() => setGameMode("speak")}
+                onClick={() => {setCurrentIndex(0);setGameMode("speak")}}
               >
                 你说我猜
               </Button>
@@ -180,7 +210,7 @@ const GuessWord: React.FC = () => {
                 className={` ${
                   gameMode === "action" ? styles.activeMode : ""
                 } ${styles.actionCard}`}
-                onClick={() => setGameMode("action")}
+                onClick={() =>{setCurrentIndex(0); setGameMode("action")}}
               >
                 你划我猜
               </Button>
@@ -228,6 +258,35 @@ const GuessWord: React.FC = () => {
           )}
         />
       </Drawer>
+
+      <Modal
+        title="自定义题目"
+        open={isModalVisible}
+        onOk={handleCustomWordsSubmit}
+        onCancel={() => setIsModalVisible(false)}
+        width={800}
+        style={{ top: "2vh" }}
+        bodyStyle={{ height: "80vh", overflowY: "auto" }}
+        okText="确定"
+        cancelText="取消"
+      >
+        <div style={{ marginBottom: 16 }}>
+          <h4>你说我猜题目（每行一个词语）：</h4>
+          <Input.TextArea
+            value={customSpeakWords}
+            onChange={(e) => setCustomSpeakWords(e.target.value)}
+            rows={10}
+          />
+        </div>
+        <div>
+          <h4>你划我猜题目（每行一个词语）：</h4>
+          <Input.TextArea
+            value={customActionWords}
+            onChange={(e) => setCustomActionWords(e.target.value)}
+            rows={10}
+          />
+        </div>
+      </Modal>
     </div>
   );
 };

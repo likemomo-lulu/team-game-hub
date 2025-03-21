@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -19,31 +19,42 @@ import {
 } from "@ant-design/icons";
 import { useTeam } from "../../contexts/TeamContext";
 import styles from "./index.module.scss";
-import { defaultInitialWords } from "../../config";
+import { defaultInitialRelayWords, defaultInitialWords } from "../../config";
 
 const AddWord: React.FC = () => {
   const { teams, incrementTeamScore } = useTeam();
   const [currentWord, setCurrentWord] = useState<string>("");
+  const [gameMode, setGameMode] = useState<"add-word" | "relay">("relay");
   const [historyVisible, setHistoryVisible] = useState<boolean>(false);
   const [history, setHistory] = useState<Array<string>>([]);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [isScoreModalVisible, setIsScoreModalVisible] =
-    useState<boolean>(false);
+  const [isScoreModalVisible, setIsScoreModalVisible] = useState<boolean>(false);
+  const [initialWords, setInitialWords] = useState<string[]>(defaultInitialRelayWords);
   const [customInitialWords, setCustomInitialWords] = useState<string>(
-    defaultInitialWords.join("\n")
+    initialWords.join("\n")
   );
-  const [initialWords, setInitialWords] =
-    useState<string[]>(defaultInitialWords);
+
   const [teamScores, setTeamScores] = useState<{ [key: string]: number }>({});
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  useEffect(()=>{
+    if(gameMode === "relay"){
+      setInitialWords(defaultInitialRelayWords)
+    }else{
+      setInitialWords(defaultInitialWords)
+    }
+  },[gameMode])
 
   const handleWordSelect = () => {
-    const randomIndex = Math.floor(Math.random() * initialWords.length);
-    const word = initialWords[randomIndex];
+    const words = initialWords
+    const word = words[currentIndex];
     setCurrentWord(word);
     setHistory((prev) => [word, ...prev.slice(0, 9)]);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % words.length);
   };
 
   const handleCustomWordsSubmit = () => {
+    setCurrentIndex(0);
     setInitialWords(customInitialWords.split("\n").filter((w) => w.trim()));
     setIsModalVisible(false);
   };
@@ -104,22 +115,42 @@ const AddWord: React.FC = () => {
       <div className={styles.centerBox}>
         <Card className={styles.questionCard}>
           <div className={styles.questionContent}>
-            {currentWord || "点击按钮开始游戏"}
+            {currentWord || "点击下一题开始游戏"}
           </div>
         </Card>
       </div>
 
       <div className={styles.controls}>
-        <Button
-          size="large"
-          icon={<PlusCircleOutlined />}
-          onClick={() => setIsScoreModalVisible(true)}
-        >
-          手动计分
-        </Button>
-        <Button type="primary" size="large" onClick={handleWordSelect}>
-          下一题
-        </Button>
+        <div className={styles.modeCards}>
+          <Button
+            type="default"
+            size="large"
+            className={`${gameMode === "add-word" ? styles.activeMode : ""} ${styles.speakCard}`}
+            onClick={() =>{setCurrentIndex(0); setGameMode("add-word")}}
+          >
+            加字游戏
+          </Button>
+          <Button
+            type="default"
+            size="large"
+            className={`${gameMode === "relay" ? styles.activeMode : ""} ${styles.actionCard}`}
+            onClick={() =>{setCurrentIndex(0); setGameMode("relay")}}
+          >
+            传声筒
+          </Button>
+        </div>
+        <div className={styles.actionButtons}>
+          <Button
+            size="large"
+            icon={<PlusCircleOutlined />}
+            onClick={() => setIsScoreModalVisible(true)}
+          >
+            手动计分
+          </Button>
+          <Button type="primary" size="large" onClick={handleWordSelect}>
+            下一题
+          </Button>
+        </div>
       </div>
 
       <Drawer
