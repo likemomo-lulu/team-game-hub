@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Row, Col, Tabs } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { Gamepad, Users } from 'lucide-react';
+import { Gamepad, Users, Image } from 'lucide-react';
 import Teams from '../Teams';
+import Background from '../Background';
 import styles from './index.module.scss';
 
 const GamesTab: React.FC = () => {
@@ -74,6 +75,16 @@ const Home: React.FC = () => {
         </span>
       ),
       children: <Teams />,
+    },
+    {
+      key: 'background',
+      label: (
+        <span>
+          <Image size={16} style={{ marginRight: '8px' }} />
+          背景墙
+        </span>
+      ),
+      children: <Background />,
     },
   ];
 
