@@ -12,6 +12,7 @@ import {
   Avatar,
   InputNumber,
 } from "antd";
+import { ClockCircleOutlined } from "@ant-design/icons";
 import {
   HistoryOutlined,
   EditOutlined,
@@ -22,8 +23,28 @@ import styles from "./index.module.scss";
 import { defaultInitialRelayWords, defaultInitialWords } from "../../config";
 
 const AddWord: React.FC = () => {
+  useEffect(() => {
+    document.title = "词语接力";
+  }, []);
   const { teams, incrementTeamScore } = useTeam();
   const [currentWord, setCurrentWord] = useState<string>("");
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audioElement = new Audio();
+    audioElement.src = process.env.PUBLIC_URL + "/audio/timer-end.wav";
+    setAudio(audioElement);
+
+    return () => {
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.src = "";
+      }
+    };
+  }, []);
+  const [countdownTime, setCountdownTime] = useState<number>(120);
+  const [isCountingDown, setIsCountingDown] = useState<boolean>(false);
+  const [timeLeft, setTimeLeft] = useState<number>(countdownTime);
   const [gameMode, setGameMode] = useState<"add-word" | "relay">("relay");
   const [historyVisible, setHistoryVisible] = useState<boolean>(false);
   const [history, setHistory] = useState<Array<string>>([]);
@@ -44,6 +65,21 @@ const AddWord: React.FC = () => {
       setInitialWords(defaultInitialWords)
     }
   },[gameMode])
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isCountingDown && timeLeft > 0) {
+      timer = setInterval(() => {
+        const newTimeLeft = timeLeft - 1;
+        setTimeLeft(newTimeLeft);
+        if (newTimeLeft === 0 && audio) {
+          audio.currentTime = 0;
+          audio.play();
+        }
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [audio, isCountingDown, timeLeft]);
 
   const handleWordSelect = () => {
     const words = initialWords
@@ -113,6 +149,30 @@ const AddWord: React.FC = () => {
       </Card>
 
       <div className={styles.centerBox}>
+        <div className={styles.timerSection}>
+          <Space>
+            <InputNumber
+              min={1}
+              max={300}
+              value={countdownTime}
+              onChange={(value) => setCountdownTime(value || 120)}
+              disabled={isCountingDown}
+              addonAfter="秒"
+            />
+            <Button
+              type="default"
+              icon={<ClockCircleOutlined />}
+              onClick={() => {
+                if (!isCountingDown) {
+                  setTimeLeft(countdownTime);
+                }
+                setIsCountingDown(!isCountingDown);
+              }}
+            >
+              {isCountingDown ? `${timeLeft}秒` : "开始倒计时"}
+            </Button>
+          </Space>
+        </div>
         <Card className={styles.questionCard}>
           <div className={styles.questionContent}>
             {currentWord || "点击下一题开始游戏"}

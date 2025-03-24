@@ -29,8 +29,25 @@ const defaultSpeakWords = speakGuessWords;
 const defaultActionWords = actionGuessWords;
 
 const GuessWord: React.FC = () => {
+  useEffect(() => {
+    document.title = "你划我猜";
+  }, []);
   const { teams, incrementTeamScore } = useTeam();
   const [currentWord, setCurrentWord] = useState<string>("");
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audioElement = new Audio();
+    audioElement.src = process.env.PUBLIC_URL + "/audio/timer-end.wav";
+    setAudio(audioElement);
+
+    return () => {
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.src = "";
+      }
+    };
+  }, []);
   const [gameMode, setGameMode] = useState<"speak" | "action">("speak");
   const [countdownTime, setCountdownTime] = useState<number>(120); // 默认2分钟
   const [isCountingDown, setIsCountingDown] = useState<boolean>(false);
@@ -55,11 +72,16 @@ const GuessWord: React.FC = () => {
     let timer: NodeJS.Timeout;
     if (isCountingDown && timeLeft > 0) {
       timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
+        const newTimeLeft = timeLeft - 1;
+        setTimeLeft(newTimeLeft);
+        if (newTimeLeft === 0 && audio) {
+          audio.currentTime = 0;
+          audio.play();
+        }
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [isCountingDown, timeLeft]);
+  }, [audio, isCountingDown, timeLeft]);
 
   const handleWordSelect = () => {
     const words = gameMode === "speak" ? speakWords : actionWords;
@@ -189,7 +211,7 @@ const GuessWord: React.FC = () => {
           </div>
           <Card className={styles.wordCard}>
             <div className={styles.wordContent}>
-              {currentWord || "点击下一题开始游戏"}
+              {currentWord || "请选择当前答题团队"}
             </div>
           </Card>
           <div className={styles.controls}>

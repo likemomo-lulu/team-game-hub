@@ -42,7 +42,7 @@ const GamesTab: React.FC = () => {
                   <img alt={game.title} src={game.image} />
                 </div>
               }
-              onClick={() => navigate(`/${game.id}`)}
+              onClick={() => window.open(`${process.env.PUBLIC_URL}#/${game.id}`, '_blank')}
               className={styles.gameCard}
             >
               <Card.Meta title={game.title} description={game.description} />

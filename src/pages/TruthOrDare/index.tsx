@@ -18,7 +18,26 @@ import styles from "./index.module.scss";
 import { defaultDareActions, defaultTruthQuestions } from "../../config";
 
 const TruthOrDare: React.FC = () => {
+  useEffect(() => {
+    document.title = "真心话大冒险";
+  }, []);
   const [currentQuestion, setCurrentQuestion] = useState<string>("");
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audioElement = new Audio();
+    audioElement.src = process.env.PUBLIC_URL + "/audio/timer-end.wav";
+    setAudio(audioElement);
+
+    return () => {
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.src = "";
+      }
+    };
+  }, []);
+
+
   const [countdownTime, setCountdownTime] = useState<number>(60);
   const [isCountingDown, setIsCountingDown] = useState<boolean>(false);
   const [timeLeft, setTimeLeft] = useState<number>(countdownTime);
@@ -38,15 +57,25 @@ const TruthOrDare: React.FC = () => {
   );
   const [dareActions, setDareActions] = useState<string[]>(defaultDareActions);
 
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isCountingDown && timeLeft > 0) {
       timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
+        setTimeLeft((prevTimeLeft) => {
+          const newTimeLeft = prevTimeLeft - 1;
+          if (newTimeLeft === 0 && audio) {
+            audio.currentTime = 0;
+            audio.play();
+          }
+          return newTimeLeft;
+        });
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [isCountingDown, timeLeft]);
+  }, [audio, isCountingDown, timeLeft]);
+
+
 
   const handleQuestionSelect = (type: "truth" | "dare") => {
     const questions = type === "truth" ? truthQuestions : dareActions;
@@ -166,7 +195,7 @@ const TruthOrDare: React.FC = () => {
         cancelText="取消"
       >
         <div style={{ marginBottom: 16 }}>
-          <h4>真心话题目（每行一个问题）：</h4>
+          <h4>真心话题题（每行一个问题）：</h4>
           <Input.TextArea
             value={customTruthQuestions}
             onChange={(e) => setCustomTruthQuestions(e.target.value)}
