@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/team-game-hub/static/css/main.44a159ba.css",
+    "main.js": "/team-game-hub/static/js/main.e4d1555f.js",
+    "static/js/453.6eb335a5.chunk.js": "/team-game-hub/static/js/453.6eb335a5.chunk.js",
+    "index.html": "/team-game-hub/index.html",
+    "main.44a159ba.css.map": "/team-game-hub/static/css/main.44a159ba.css.map",
+    "main.e4d1555f.js.map": "/team-game-hub/static/js/main.e4d1555f.js.map",
+    "453.6eb335a5.chunk.js.map": "/team-game-hub/static/js/453.6eb335a5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.44a159ba.css",
+    "static/js/main.e4d1555f.js"
+  ]
+}
