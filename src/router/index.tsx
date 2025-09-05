@@ -1,8 +1,10 @@
 import { createHashRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import TruthOrDare from "../pages/Games/TruthOrDare";
-import GuessWord from "../pages/Games/GuessWord";
-import AddWord from "../pages/Games/AddWord";
+import GuessBySpeak from "../pages/Games/GuessBySpeak";
+import GuessByAction from "../pages/Games/GuessByAction";
+import AddWordGame from "../pages/Games/AddWordGame";
+import Relay from "../pages/Games/Relay";
 import Teams from "../pages/Teams";
 
 const router = createHashRouter([
@@ -15,12 +17,20 @@ const router = createHashRouter([
     element: <TruthOrDare />,
   },
   {
-    path: "/guess-word",
-    element: <GuessWord />,
+    path: "/speak-guess",
+    element: <GuessBySpeak />,
   },
   {
-    path: "/add-word",
-    element: <AddWord />,
+    path: "/action-guess",
+    element: <GuessByAction />,
+  },
+  {
+    path: "/add-word-game",
+    element: <AddWordGame />,
+  },
+  {
+    path: "/relay",
+    element: <Relay />,
   },
   {
     path: "/teams",

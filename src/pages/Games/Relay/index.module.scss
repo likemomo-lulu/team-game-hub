@@ -18,7 +18,13 @@
   width: 100%;
   margin-left: 260px;
   max-width: 800px;
-  margin-top: 16px;
+  margin-top: 56px;
+}
+
+.timerSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
 }
 
 .questionCard {
@@ -28,13 +34,15 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 
   .questionContent {
-    font-size: 60px;
+    font-size: 36px;
     text-align: center;
     min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #222;
+    line-height: 1.4;
+    padding: 0 20px;
   }
 
   :global(.ant-card-body) {
@@ -60,7 +68,7 @@
 
     .score {
       font-weight: bold;
-      color: #fb4141;
+      color: #52c41a;
     }
   }
 
@@ -76,35 +84,22 @@
   justify-content: space-between;
   margin-bottom: 24px;
   max-width: 800px;
-  margin-left: 260px;
 }
 
-.modeCards {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 60%;
-}
+.gameTitle {
+  flex: 1;
 
-.modeCard {
-  padding: 8px;
-  text-align: center;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  h2 {
+    margin: 0;
+    color: #52c41a;
+    font-size: 24px;
+  }
 
-.speakCard {
-  margin-right: 16px;
-}
-
-.actionCard {
-  margin-left: 4px;
-}
-
-.activeMode {
-  background: #fb4141;
-  color: #fff;
+  p {
+    margin: 4px 0 0 0;
+    color: #666;
+    font-size: 14px;
+  }
 }
 
 .actionButtons {
@@ -118,12 +113,12 @@
     border-radius: 24px;
 
     &:global(.ant-btn-primary) {
-      background-color: #fb4141;
-      border-color: #fb4141;
+      background-color: #52c41a;
+      border-color: #52c41a;
 
       &:hover {
-        background-color: #fb4141 !important;
-        border-color: #fb4141 !important;
+        background-color: #52c41a !important;
+        border-color: #52c41a !important;
       }
     }
   }

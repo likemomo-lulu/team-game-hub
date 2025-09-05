@@ -5,12 +5,6 @@
   margin-top: 30px;
 }
 
-.actionButtons {
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .topActionButtons {
   position: absolute;
   top: 20px;
@@ -20,40 +14,11 @@
   justify-content: flex-end;
 }
 
-.modeCards {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 60%;
-}
-
-.modeCard {
-  padding: 8px;
-  text-align: center;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.speakCard {
-  margin-right: 16px;
-}
-
-.actionCard {
-  margin-left: 4px;
-}
-
-.activeMode {
-  background: #fb4141;
-  color: #fff;
-}
-
 .centerBox {
   width: 100%;
   margin-left: 260px;
   max-width: 800px;
-  margin-top: 16px;
+  margin-top: 56px;
 }
 
 .wordCard {
@@ -82,12 +47,27 @@
   justify-content: space-between;
   margin-bottom: 24px;
   max-width: 800px;
+}
 
-  .actionButtons {
-    position: static;
-    display: flex;
-    gap: 12px;
+.gameTitle {
+  flex: 1;
+
+  h2 {
+    margin: 0;
+    color: #fb4141;
+    font-size: 24px;
   }
+
+  p {
+    margin: 4px 0 0 0;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  gap: 12px;
 
   .correctButton {
     background-color: #52c41a;
@@ -105,6 +85,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 32px;
+
   :global(.ant-input-number) {
     width: 80px;
   }

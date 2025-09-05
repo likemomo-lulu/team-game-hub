@@ -3,7 +3,7 @@ import { Tabs } from "antd";
 import { Gamepad, Users, Image } from "lucide-react";
 import Teams from "../Teams";
 import Background from "../Background";
-import GamesTab from "../Games/GamesTab";
+import GamesTab from "./GameTab";
 import styles from "./index.module.scss";
 
 const Home: React.FC = () => {

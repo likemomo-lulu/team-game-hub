@@ -1,0 +1,50 @@
+.historyDrawer {
+  .drawerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.historyList {
+  .ant-list-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .ant-list-item-meta {
+    .ant-list-item-meta-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1890ff;
+      margin-bottom: 4px;
+    }
+    
+    .ant-list-item-meta-description {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.4;
+    }
+  }
+}
+
+.emptyHistory {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 14px;
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .historyDrawer {
+    :global(.ant-drawer-content-wrapper) {
+      width: 90vw !important;
+    }
+  }
+}

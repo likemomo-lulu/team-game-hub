@@ -1,0 +1,47 @@
+.customTopicModal {
+  .content {
+    padding: 16px 0;
+    
+    .promptText {
+      margin-bottom: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .textArea {
+      font-size: 14px;
+      line-height: 1.6;
+      border-radius: 8px;
+      border: 1px solid #d9d9d9;
+      transition: all 0.3s;
+      
+      &:focus {
+        border-color: #1890ff;
+        box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+      }
+      
+      &::placeholder {
+        color: #bfbfbf;
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .customTopicModal {
+    .content {
+      padding: 12px 0;
+      
+      .promptText {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+      
+      .textArea {
+        font-size: 13px;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.scoreCard {
+  position: absolute;
+  width: 260px;
+  left: 24px;
+  top: 120px;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  .teamSelector {
+    margin-bottom: 16px;
+    
+    p {
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+  }
+
+  .teamScoreList {
+    :global(.ant-list-item) {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    .score {
+      font-weight: bold;
+    }
+  }
+
+  .noTeam {
+    text-align: center;
+    padding: 16px 0;
+    color: #999;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .scoreCard {
+    position: relative;
+    width: 100%;
+    left: auto;
+    top: auto;
+    margin-bottom: 16px;
+  }
+}

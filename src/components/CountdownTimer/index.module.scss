@@ -1,0 +1,46 @@
+.countdownTimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 32px;
+
+  :global(.ant-input-number) {
+    width: 80px;
+  }
+
+  button {
+    width: 140px;
+  }
+}
+
+.timeLeft {
+  width: 100px;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  color: red;
+}
+
+.pauseButton {
+  width: 80px !important;
+}
+
+.resetButton {
+  width: 80px !important;
+}
+
+@media (max-width: 480px) {
+  .countdownTimer {
+    padding: 8px;
+
+    :global(.ant-space) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .timeInput {
+      margin-bottom: 8px;
+    }
+  }
+}

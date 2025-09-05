@@ -11,8 +11,6 @@ export interface Team {
   name: string;
   avatar: string;
   scores: {
-    "guess-word"?: number;
-    "add-word"?: number;
     [key: string]: number | undefined;
   };
 }

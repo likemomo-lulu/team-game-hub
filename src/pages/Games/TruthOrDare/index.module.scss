@@ -6,90 +6,48 @@
   min-height: 100vh;
 }
 
-.questionCard {
+.centerBox {
   width: 100%;
   max-width: 800px;
-  margin-bottom: 32px;
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-
-  :global(.ant-card-body) {
-    padding: 48px 24px;
-  }
-}
-
-.questionContent {
-  font-size: 24px;
-  text-align: center;
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #222;
+  margin-top: 80px;
 }
 
 .controls {
   margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
 
-  button {
-    min-width: 120px;
-    height: 48px;
-    font-size: 18px;
-    border-radius: 24px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-      filter: brightness(1.1);
-    }
-
-    &:global(.ant-btn-primary) {
-      background-color: #FB4141;
-      border-color: #FB4141;
+  .actionButtons {
+    button {
+      min-width: 120px;
+      height: 48px;
+      font-size: 18px;
+      border-radius: 24px;
+      transition: all 0.3s ease;
 
       &:hover {
-        background-color: #FB4141 !important;
-        border-color: #FB4141 !important;
+        transform: scale(1.05);
+        filter: brightness(1.1);
       }
 
-      &:global(.ant-btn-dangerous) {
-        background-color: #5CB338;
-        border-color: #5CB338;
+      &:global(.ant-btn-primary) {
+        background-color: #fb4141;
+        border-color: #fb4141;
 
         &:hover {
-          background-color: #5CB338 !important;
-          border-color: #5CB338 !important;
+          background-color: #fb4141 !important;
+          border-color: #fb4141 !important;
         }
-      }
-    }
-  }
-}
 
-.timerSection {
-  margin-bottom: 32px;
-  :global(.ant-input-number) {
-    width: 80px;
-  }
+        &:global(.ant-btn-dangerous) {
+          background-color: #5cb338;
+          border-color: #5cb338;
 
-  button {
-    width: 140px;
-  }
-}
-
-.actionButtons {
-  width: 100%;
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: flex-end;
-
-  :global(.ant-space) {
-    .ant-btn-link {
-      color: #5a5656;
-      font-size: 16px;
-
-      &:hover {
-        color: #1890ff;
+          &:hover {
+            background-color: #5cb338 !important;
+            border-color: #5cb338 !important;
+          }
+        }
       }
     }
   }

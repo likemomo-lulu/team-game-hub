@@ -1,0 +1,43 @@
+.actionButtons {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  .ant-space {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .ant-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+      padding: 4px 8px;
+      height: auto;
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 480px) {
+  .actionButtons {
+    margin-bottom: 16px;
+
+    .ant-space {
+      gap: 6px;
+    }
+
+    .ant-btn {
+      font-size: 11px;
+      padding: 2px 6px;
+    }
+  }
+}
