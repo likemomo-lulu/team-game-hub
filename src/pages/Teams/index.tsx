@@ -58,14 +58,15 @@ const Teams: React.FC = () => {
     setIsModalVisible(false);
   };
 
-  const [isGameScoreManageModalVisible, setIsGameScoreManageModalVisible] = useState(false);
+  const [isGameScoreManageModalVisible, setIsGameScoreManageModalVisible] =
+    useState(false);
   const [customGameName, setCustomGameName] = useState("");
   const [editingGameId, setEditingGameId] = useState("");
-  const [customScores, setCustomScores] = useState<{ [key: string]: number }>({});
+  const [customScores, setCustomScores] = useState<{ [key: string]: number }>(
+    {}
+  );
   const [isEditMode, setIsEditMode] = useState(false);
   const [showAddGame, setShowAddGame] = useState(false);
-
-  console.log("teams------", teams);
 
   // 获取所有游戏ID
   const getGameIds = () => {
@@ -91,7 +92,9 @@ const Teams: React.FC = () => {
       align: "center" as any,
     },
     {
-      title: <div style={{display:'flex',justifyContent:'center'}}>团队</div>,
+      title: (
+        <div style={{ display: "flex", justifyContent: "center" }}>团队</div>
+      ),
       dataIndex: "name",
       key: "name",
       render: (text: string, record: Team) => (
@@ -111,14 +114,14 @@ const Teams: React.FC = () => {
         let scoreStyle;
 
         if (index === 0) {
-          trophyIcon = <TrophyOutlined style={{ color: "#FFD700" }} />; // 金色奖杯
-          scoreStyle = { color: "#FFD700", fontWeight: "bold" };
+          trophyIcon = <TrophyOutlined style={{ color: "#F7DC6F" }} />; // 金色奖杯
+          scoreStyle = { color: "#F7DC6F", fontWeight: "bold" };
         } else if (index === 1) {
-          trophyIcon = <TrophyOutlined style={{ color: "#C0C0C0" }} />; // 银色奖杯
-          scoreStyle = { color: "#C0C0C0", fontWeight: "bold" };
+          trophyIcon = <TrophyOutlined style={{ color: "#74C0FC" }} />; // 银色奖杯
+          scoreStyle = { color: "#74C0FC", fontWeight: "bold" };
         } else if (index === 2) {
-          trophyIcon = <TrophyOutlined style={{ color: "#CD7F32" }} />; // 铜色奖杯
-          scoreStyle = { color: "#CD7F32", fontWeight: "bold" };
+          trophyIcon = <TrophyOutlined style={{ color: "#B87333" }} />; // 铜色奖杯
+          scoreStyle = { color: "#B87333", fontWeight: "bold" };
         } else {
           trophyIcon = null;
           scoreStyle = { color: "#666666" };
@@ -160,10 +163,14 @@ const Teams: React.FC = () => {
     },
   ];
 
+  const sortedTeams = [...teams].sort(
+    (a, b) => getTotalScore(b) - getTotalScore(a)
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>团队设置</h1>
+        <h1 className={styles.title}>团队排名</h1>
         <Space>
           <Button
             type="primary"
@@ -197,7 +204,7 @@ const Teams: React.FC = () => {
 
       <Card className={styles.teamsCard}>
         <Table
-          dataSource={teams}
+          dataSource={sortedTeams}
           columns={columns}
           rowKey="id"
           pagination={false}
@@ -309,7 +316,10 @@ const Teams: React.FC = () => {
                     value={customScores[team.id] || ""}
                     onChange={(e) => {
                       const value = parseInt(e.target.value) || 0;
-                      setCustomScores((prev) => ({ ...prev, [team.id]: value }));
+                      setCustomScores((prev) => ({
+                        ...prev,
+                        [team.id]: value,
+                      }));
                     }}
                     style={{ width: 100 }}
                     addonAfter="分"
@@ -322,7 +332,10 @@ const Teams: React.FC = () => {
 
         {(isEditMode || editingGameId) && (
           <div>
-            <h4>编辑<span style={{ color: 'red' }}>{editingGameId}</span>游戏得分：</h4>
+            <h4>
+              编辑<span style={{ color: "red" }}>{editingGameId}</span>
+              游戏得分：
+            </h4>
             <List
               dataSource={teams}
               renderItem={(team) => (
@@ -335,7 +348,10 @@ const Teams: React.FC = () => {
                     value={customScores[team.id] || ""}
                     onChange={(e) => {
                       const value = parseInt(e.target.value) || 0;
-                      setCustomScores((prev) => ({ ...prev, [team.id]: value }));
+                      setCustomScores((prev) => ({
+                        ...prev,
+                        [team.id]: value,
+                      }));
                     }}
                     style={{ width: 100 }}
                     addonAfter="分"
@@ -359,10 +375,13 @@ const Teams: React.FC = () => {
                     setEditingGameId(gameId);
                     setIsEditMode(true);
                     setCustomScores(
-                      teams.reduce((acc, team) => ({
-                        ...acc,
-                        [team.id]: team.scores[gameId] || 0,
-                      }), {})
+                      teams.reduce(
+                        (acc, team) => ({
+                          ...acc,
+                          [team.id]: team.scores[gameId] || 0,
+                        }),
+                        {}
+                      )
                     );
                   }}
                 >
@@ -380,15 +399,11 @@ const Teams: React.FC = () => {
                 </Popconfirm>,
               ].filter(Boolean)}
             >
-              <div style={{ flex: 1 }}>
-                {gameId}
-              </div>
+              <div style={{ flex: 1 }}>{gameId}</div>
             </List.Item>
           )}
         />
       </Modal>
-
-
     </div>
   );
 };
