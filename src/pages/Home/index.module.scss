@@ -26,6 +26,8 @@
 
 .gameCard {
   transition: all 0.3s;
+  height: 310px;
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-5px);

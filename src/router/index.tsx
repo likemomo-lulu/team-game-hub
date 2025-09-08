@@ -5,7 +5,9 @@ import GuessBySpeak from "../pages/Games/GuessBySpeak";
 import GuessByAction from "../pages/Games/GuessByAction";
 import AddWordGame from "../pages/Games/AddWordGame";
 import Relay from "../pages/Games/Relay";
+import RiddleGame from "../pages/Games/RiddleGame";
 import Teams from "../pages/Teams";
+import BrainTeaserGame from "../pages/Games/BrainTeaserGame";
 
 const router = createHashRouter([
   {
@@ -31,6 +33,14 @@ const router = createHashRouter([
   {
     path: "/relay",
     element: <Relay />,
+  },
+  {
+    path: "/riddle-game",
+    element: <RiddleGame />,
+  },
+  {
+    path: "/brain-teaser-game",
+    element: <BrainTeaserGame />,
   },
   {
     path: "/teams",

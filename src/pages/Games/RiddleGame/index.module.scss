@@ -1,0 +1,134 @@
+.container {
+  padding: 24px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  button {
+    min-width: 120px;
+    height: 48px;
+    font-size: 18px;
+    border-radius: 24px;
+
+    &:global(.ant-btn-primary) {
+      background-color: #fb4141;
+      border-color: #fb4141;
+
+      &:hover {
+        background-color: #fb4141 !important;
+        border-color: #fb4141 !important;
+      }
+    }
+  }
+}
+
+.answerButton {
+  &:global(.ant-btn-default) {
+    background-color: #52c41a;
+    border-color: #52c41a;
+    color: white;
+
+    &:hover {
+      background-color: #73d13d !important;
+      border-color: #73d13d !important;
+      color: white !important;
+    }
+  }
+}
+
+.answerSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+}
+
+.answerLabel {
+  font-size: 20px;
+  color: #2a2b2c;
+  font-weight: 600;
+  margin: 0;
+}
+
+.answerText {
+  font-size: 20px;
+  color: #2a2b2c;
+  font-weight: bold;
+  margin: 0;
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .actionButtons {
+    justify-content: center;
+
+    button {
+      min-width: 100px;
+      height: 44px;
+      font-size: 16px;
+    }
+  }
+
+  .answerSection {
+    padding: 6px 12px;
+  }
+
+  .answerLabel {
+    font-size: 12px;
+  }
+
+  .answerText {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+
+  .answerSection {
+    padding: 6px 10px;
+    margin-bottom: 8px;
+  }
+
+  .answerLabel {
+    font-size: 11px;
+  }
+
+  .answerText {
+    font-size: 13px;
+  }
+}

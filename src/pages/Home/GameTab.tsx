@@ -37,6 +37,18 @@ const GamesTab: React.FC = () => {
       description: "经典的趣味传声筒，考验团队的沟通和理解能力",
       image: "/team-game-hub/images/relay.png",
     },
+    {
+      id: "riddle-game",
+      title: "猜灯谜游戏",
+      description: "传统的猜灯谜游戏",
+      image: "/team-game-hub/images/lantern-riddles.png",
+    },
+    {
+      id: "brain-teaser-game",
+      title: "脑筋急转弯游戏",
+      description: "开动脑筋，挑战思维极限的趣味问答游戏",
+      image: "/team-game-hub/images/brain-teaser.png",
+    },
   ];
 
   return (
