@@ -4,6 +4,8 @@
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  padding: 12px;
+  height: 350px;
 
   &:hover {
     transform: translateY(-2px);
@@ -11,7 +13,8 @@
   }
 
   :global(.ant-card-body) {
-    padding: 48px 24px;
+    padding: 12px;
+    height: 100%;
   }
 
   // 加载状态样式
@@ -33,6 +36,9 @@
   padding: 0 20px;
   word-break: break-word;
   hyphens: auto;
+  border: 3px dashed orange;
+  border-radius: 16px;
+  height: 100%;
 
   // 响应式字体大小
   @media (max-width: 768px) {

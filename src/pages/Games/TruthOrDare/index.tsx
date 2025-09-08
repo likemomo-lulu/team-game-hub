@@ -7,6 +7,7 @@ import CountdownTimer from "../../../components/CountdownTimer";
 import GameHistory from "../../../components/GameHistory";
 import GameActionButtons from "../../../components/GameActionButtons";
 import GameQuestionCard from "../../../components/GameQuestionCard";
+import GameContainer from "../../../components/GameContainer";
 
 const TruthOrDare: React.FC = () => {
   useEffect(() => {
@@ -45,78 +46,80 @@ const TruthOrDare: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <GameTitle title="真心话大冒险" />
-      <GameActionButtons
-        onCustomQuestions={() => setIsModalVisible(true)}
-        onHistory={() => setHistoryVisible(true)}
-      />
-      <div className={styles.centerBox}>
-        <GameQuestionCard
-          content={currentQuestion}
-          placeholder="点击下方按钮开始游戏"
-          fontSize="small"
+    <GameContainer>
+      <div className={styles.container}>
+        <GameTitle title="真心话大冒险" />
+        <GameActionButtons
+          onCustomQuestions={() => setIsModalVisible(true)}
+          onHistory={() => setHistoryVisible(true)}
         />
+        <div className={styles.centerBox}>
+          <GameQuestionCard
+            content={currentQuestion}
+            placeholder="点击下方按钮开始游戏"
+            fontSize="medium"
+          />
 
-        <div className={styles.controls}>
-          {/* 倒计时区域 */}
-          <CountdownTimer />
-          <Space size="large" className={styles.actionButtons}>
-            <Button
-              type="primary"
-              size="large"
-              onClick={() => handleQuestionSelect("truth")}
-            >
-              真心话
-            </Button>
-            <Button
-              type="primary"
-              danger
-              size="large"
-              onClick={() => handleQuestionSelect("dare")}
-            >
-              大冒险
-            </Button>
-          </Space>
+          <div className={styles.controls}>
+            {/* 倒计时区域 */}
+            <CountdownTimer />
+            <Space size="large" className={styles.actionButtons}>
+              <Button
+                type="primary"
+                size="large"
+                onClick={() => handleQuestionSelect("truth")}
+              >
+                真心话
+              </Button>
+              <Button
+                type="primary"
+                danger
+                size="large"
+                onClick={() => handleQuestionSelect("dare")}
+              >
+                大冒险
+              </Button>
+            </Space>
+          </div>
         </div>
+
+        <GameHistory
+          visible={historyVisible}
+          onClose={() => setHistoryVisible(false)}
+          history={history}
+          title="历史记录"
+          historyType="truthOrDare"
+        />
+        <Modal
+          title="自定义题目"
+          open={isModalVisible}
+          onOk={handleCustomQuestionsSubmit}
+          onCancel={() => setIsModalVisible(false)}
+          width={800}
+          style={{ top: "2vh" }}
+          bodyStyle={{ height: "80vh", overflowY: "auto" }}
+          okText="确定"
+          cancelText="取消"
+        >
+          <div style={{ marginBottom: 16 }}>
+            <h4>真心话题题（每行一个问题）：</h4>
+            <Input.TextArea
+              value={customTruthQuestions}
+              onChange={(e) => setCustomTruthQuestions(e.target.value)}
+              rows={10}
+            />
+          </div>
+          <div>
+            <h4>大冒险题目（每行一个动作）：</h4>
+            <Input.TextArea
+              value={customDareActions}
+              onChange={(e) => setCustomDareActions(e.target.value)}
+              rows={10}
+            />
+          </div>
+        </Modal>
       </div>
-
-      <GameHistory
-        visible={historyVisible}
-        onClose={() => setHistoryVisible(false)}
-        history={history}
-        title="历史记录"
-        historyType="truthOrDare"
-      />
-      <Modal
-        title="自定义题目"
-        open={isModalVisible}
-        onOk={handleCustomQuestionsSubmit}
-        onCancel={() => setIsModalVisible(false)}
-        width={800}
-        style={{ top: "2vh" }}
-        bodyStyle={{ height: "80vh", overflowY: "auto" }}
-        okText="确定"
-        cancelText="取消"
-      >
-        <div style={{ marginBottom: 16 }}>
-          <h4>真心话题题（每行一个问题）：</h4>
-          <Input.TextArea
-            value={customTruthQuestions}
-            onChange={(e) => setCustomTruthQuestions(e.target.value)}
-            rows={10}
-          />
-        </div>
-        <div>
-          <h4>大冒险题目（每行一个动作）：</h4>
-          <Input.TextArea
-            value={customDareActions}
-            onChange={(e) => setCustomDareActions(e.target.value)}
-            rows={10}
-          />
-        </div>
-      </Modal>
-    </div>
+    </GameContainer>
   );
 };
 

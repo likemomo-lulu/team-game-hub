@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, Space, Row, Col } from "antd";
-import {
-  RedoOutlined,
-  CheckOutlined,
-  StepForwardOutlined,
-} from "@ant-design/icons";
+import { Button } from "antd";
+import { CheckOutlined, StepForwardOutlined } from "@ant-design/icons";
 import { useTeam } from "../../../contexts/TeamContext";
 import styles from "./index.module.scss";
 import { actionGuessWords } from "../../../config";
@@ -15,6 +11,8 @@ import TeamScoreCard from "../../../components/TeamScoreCard";
 import GameHistory from "../../../components/GameHistory";
 import GameActionButtons from "../../../components/GameActionButtons";
 import GameQuestionCard from "../../../components/GameQuestionCard";
+import GameContainer from "../../../components/GameContainer";
+import CenterBox from "../../../components/CenterBox";
 
 const defaultActionWords = actionGuessWords;
 
@@ -67,82 +65,83 @@ const GuessByAction: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <GameTitle title="你划我猜" />
-      <GameActionButtons
-        onCustomQuestions={() => setIsModalVisible(true)}
-        onHistory={() => setHistoryVisible(true)}
-      />
-
-      <TeamScoreCard
-        gameType="你划我猜"
-        showTeamSelector={true}
-        selectorTitle="当前答题团队："
-        selectedTeamId={currentTeamId}
-        onTeamChange={setCurrentTeamId}
-      />
-      <div className={styles.centerBox}>
-        <GameQuestionCard
-          content={currentWord}
-          placeholder="请选择当前答题团队"
-          fontSize="large"
+    <GameContainer>
+      <div className={styles.container}>
+        <GameTitle title="你划我猜" />
+        <GameActionButtons
+          onCustomQuestions={() => setIsModalVisible(true)}
+          onHistory={() => setHistoryVisible(true)}
         />
 
-        <div className={styles.controls}>
-          <CountdownTimer
-            defaultTime={120}
-            className={styles.countdownSection}
+        <TeamScoreCard
+          gameType="你划我猜"
+          showTeamSelector={true}
+          selectorTitle="当前答题团队："
+          selectedTeamId={currentTeamId}
+          onTeamChange={setCurrentTeamId}
+        />
+        <CenterBox>
+          <GameQuestionCard
+            content={currentWord}
+            placeholder="请选择当前答题团队"
           />
-          <div className={styles.actionButtons}>
-            <Button
-              type="primary"
-              size="large"
-              onClick={handleWordSelect}
-              disabled={!currentTeamId}
-            >
-              下一题
-            </Button>
-            <Button
-              type="primary"
-              size="large"
-              icon={<CheckOutlined />}
-              onClick={handleCorrect}
-              className={styles.correctButton}
-              disabled={!currentWord}
-            >
-              答对了
-            </Button>
-            <Button
-              danger
-              size="large"
-              icon={<StepForwardOutlined />}
-              onClick={handleSkip}
-              disabled={!currentWord}
-            >
-              跳过
-            </Button>
+
+          <div className={styles.controls}>
+            <CountdownTimer
+              defaultTime={120}
+              className={styles.countdownSection}
+            />
+            <div className={styles.actionButtons}>
+              <Button
+                type="primary"
+                size="large"
+                onClick={handleWordSelect}
+                disabled={!currentTeamId}
+              >
+                下一题
+              </Button>
+              <Button
+                type="primary"
+                size="large"
+                icon={<CheckOutlined />}
+                onClick={handleCorrect}
+                className={styles.correctButton}
+                disabled={!currentWord}
+              >
+                答对了
+              </Button>
+              <Button
+                danger
+                size="large"
+                icon={<StepForwardOutlined />}
+                onClick={handleSkip}
+                disabled={!currentWord}
+              >
+                跳过
+              </Button>
+            </div>
           </div>
-        </div>
+        </CenterBox>
+
+        <GameHistory
+          visible={historyVisible}
+          onClose={() => setHistoryVisible(false)}
+          history={history}
+          title="历史记录"
+          historyType="word"
+          showResetButton={true}
+          onReset={resetHistory}
+        />
+
+        <CustomTopicModal
+          visible={isModalVisible}
+          value={customActionWords}
+          onChange={setCustomActionWords}
+          onOk={handleCustomWordsSubmit}
+          onCancel={() => setIsModalVisible(false)}
+        />
       </div>
-
-      <GameHistory
-        visible={historyVisible}
-        onClose={() => setHistoryVisible(false)}
-        history={history}
-        title="历史记录"
-        historyType="word"
-        showResetButton={true}
-        onReset={resetHistory}
-      />
-
-      <CustomTopicModal
-        visible={isModalVisible}
-        value={customActionWords}
-        onChange={setCustomActionWords}
-        onOk={handleCustomWordsSubmit}
-        onCancel={() => setIsModalVisible(false)}
-      />
-    </div>
+    </GameContainer>
   );
 };
 
