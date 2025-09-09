@@ -45,3 +45,63 @@
     object-position: top; /* 确保显示图片的上半部分 */
   }
 }
+
+// 移动端响应式设计
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .tabs {
+    margin-bottom: 16px;
+
+    :global(.ant-tabs-nav) {
+      margin-bottom: 16px;
+    }
+
+    :global(.ant-tabs-tab) {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  }
+
+  .gameCard {
+    height: 280px;
+    margin-bottom: 16px;
+  }
+
+  .imageContainer {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .tabs {
+    :global(.ant-tabs-tab) {
+      padding: 6px 8px;
+      font-size: 13px;
+    }
+  }
+
+  .gameCard {
+    height: 250px;
+  }
+
+  .imageContainer {
+    height: 140px;
+  }
+}
