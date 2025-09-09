@@ -1,0 +1,239 @@
+/* 全局移动端响应式样式 */
+
+/* 平板设备适配 (768px 及以下) */
+@media (max-width: 768px) {
+  /* 通用容器样式 */
+  .container,
+  [class*="container"] {
+    padding: 16px !important;
+    padding-top: 80px !important; /* 为顶部按钮留出空间 */
+  }
+
+  /* GameActionButtons 组件样式 - 确保在最上层 */
+  [class*="GameActionButtons_actionButtons"] {
+    z-index: 1000 !important;
+    position: fixed !important;
+    top: 16px !important;
+    right: 16px !important;
+    left: 16px !important;
+    display: flex !important;
+    justify-content: center !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* 通用标题样式 */
+  h1,
+  .title,
+  [class*="title"] {
+    font-size: 20px !important;
+    text-align: center;
+  }
+
+  /* 通用控制区域样式 */
+  .controls,
+  [class*="controls"] {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  /* 通用按钮组样式 */
+  .actionButtons,
+  [class*="actionButtons"],
+  .ant-space {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  /* 通用按钮样式 */
+  .ant-btn {
+    min-width: 100px !important;
+    height: 44px !important;
+    font-size: 16px !important;
+  }
+
+  /* 通用表格样式 */
+  .ant-table {
+    font-size: 14px !important;
+  }
+
+  .ant-table th {
+    font-size: 14px !important;
+    padding: 8px 4px !important;
+  }
+
+  .ant-table td {
+    padding: 8px 4px !important;
+  }
+
+  /* 通用卡片样式 */
+  .ant-card {
+    margin: 8px !important;
+  }
+
+  /* 游戏卡片样式 */
+  [class*="gameCard"] {
+    height: 280px !important;
+  }
+
+  [class*="imageContainer"] {
+    height: 180px !important;
+  }
+
+  /* 团队得分卡片样式 - 确保不遮挡其他元素 */
+  [class*="scoreCard"] {
+    z-index: 100 !important;
+    position: relative !important;
+    width: 100% !important;
+    left: auto !important;
+    top: auto !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* 倒计时区域样式 */
+  [class*="countdownSection"] {
+    margin-bottom: 24px !important;
+  }
+
+  [class*="countdownSection"] .ant-space {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+
+/* 手机设备适配 (480px 及以下) */
+@media (max-width: 480px) {
+  /* 通用容器样式 */
+  .container,
+  [class*="container"] {
+    padding: 12px !important;
+    padding-top: 70px !important; /* 为顶部按钮留出空间 */
+  }
+
+  /* GameActionButtons 组件样式 - 更紧凑的布局 */
+  [class*="GameActionButtons_actionButtons"] {
+    top: 12px !important;
+    right: 12px !important;
+    left: 12px !important;
+    padding: 6px !important;
+  }
+
+  /* 通用标题样式 */
+  h1,
+  .title,
+  [class*="title"] {
+    font-size: 18px !important;
+  }
+
+  /* 通用按钮组样式 */
+  .actionButtons,
+  [class*="actionButtons"] {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .actionButtons button,
+  [class*="actionButtons"] button {
+    width: 100% !important;
+    max-width: 200px !important;
+  }
+
+  /* 通用表格样式 */
+  .ant-table {
+    font-size: 12px !important;
+  }
+
+  .ant-table th {
+    font-size: 12px !important;
+    padding: 6px 2px !important;
+  }
+
+  .ant-table td {
+    padding: 6px 2px !important;
+  }
+
+  /* 通用间距调整 */
+  .ant-space {
+    gap: 4px !important;
+  }
+
+  /* 头像样式 */
+  .ant-avatar {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  /* 小按钮样式 */
+  .ant-btn-sm,
+  .ant-table .ant-btn {
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+    height: auto !important;
+  }
+
+  /* 游戏卡片样式 */
+  [class*="gameCard"] {
+    height: 250px !important;
+  }
+
+  [class*="imageContainer"] {
+    height: 150px !important;
+  }
+
+  /* 倒计时区域样式 */
+  [class*="countdownSection"] {
+    margin-bottom: 20px !important;
+  }
+
+  [class*="countdownSection"] button {
+    width: 120px !important;
+  }
+
+  /* 输入框样式 */
+  .ant-input-number {
+    width: 70px !important;
+  }
+
+  /* Header 区域样式 */
+  [class*="header"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+}
+
+/* 通用工具类 */
+.mobile-hidden {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  display: none !important;
+  @media (max-width: 768px) {
+    display: block !important;
+  }
+}
+
+.mobile-flex {
+  @media (max-width: 768px) {
+    display: flex !important;
+  }
+}
+
+/* 文本对齐工具类 */
+.mobile-center {
+  @media (max-width: 768px) {
+    text-align: center !important;
+  }
+}
+
+/* 宽度工具类 */
+.mobile-full-width {
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
+}
