@@ -12,7 +12,6 @@ const Background: React.FC = () => {
     const backgroundImages = [
       "/team-game-hub/background/background1.png",
       "/team-game-hub/background/background2.png",
-      "/team-game-hub/background/background3.png",
       "/team-game-hub/background/background4.png",
       "/team-game-hub/background/background5.png",
     ];
