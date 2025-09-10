@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
+import { PlusOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
+import CustomGameModal, {
+  CustomGameData,
+} from "../../components/CustomGameModal";
 
 const GamesTab: React.FC = () => {
   const navigate = useNavigate();
+  const [customGameModalVisible, setCustomGameModalVisible] = useState(false);
+
+  // 处理自定义游戏创建
+  const handleCustomGameConfirm = (gameData: CustomGameData) => {
+    // 将游戏数据存储到 sessionStorage 中
+    sessionStorage.setItem("customGameData", JSON.stringify(gameData));
+    // 打开自定义游戏页面
+    window.open(`${process.env.PUBLIC_URL}#/custom-game`, "_blank");
+  };
 
   const games = [
     {
@@ -49,6 +62,13 @@ const GamesTab: React.FC = () => {
       description: "开动脑筋，挑战思维极限的趣味问答游戏",
       image: "/team-game-hub/images/brain-teaser.png",
     },
+    {
+      id: "custom-game",
+      title: "自定义游戏",
+      description: "创建属于你的专属游戏，支持问答和开放式两种模式",
+      image: "/team-game-hub/images/gift-box.jpg",
+      isCustom: true,
+    },
   ];
 
   return (
@@ -68,9 +88,16 @@ const GamesTab: React.FC = () => {
                   <img alt={game.title} src={game.image} />
                 </div>
               }
-              onClick={() =>
-                window.open(`${process.env.PUBLIC_URL}#/${game.id}`, "_blank")
-              }
+              onClick={() => {
+                if (game.id === "custom-game") {
+                  setCustomGameModalVisible(true);
+                } else {
+                  window.open(
+                    `${process.env.PUBLIC_URL}#/${game.id}`,
+                    "_blank"
+                  );
+                }
+              }}
               className={styles.gameCard}
             >
               <Card.Meta title={game.title} description={game.description} />
@@ -78,6 +105,12 @@ const GamesTab: React.FC = () => {
           </Col>
         ))}
       </Row>
+
+      <CustomGameModal
+        visible={customGameModalVisible}
+        onCancel={() => setCustomGameModalVisible(false)}
+        onConfirm={handleCustomGameConfirm}
+      />
     </div>
   );
 };

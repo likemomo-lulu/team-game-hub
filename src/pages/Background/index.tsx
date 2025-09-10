@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Card } from 'antd';
-import styles from './index.module.scss';
+import React, { useState, useEffect } from "react";
+import { Row, Col, Card } from "antd";
+import styles from "./index.module.scss";
 
 const Background: React.FC = () => {
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
@@ -10,9 +10,11 @@ const Background: React.FC = () => {
   useEffect(() => {
     // 预设背景图片路径
     const backgroundImages = [
-      '/team-game-hub/background/background1.png',
-      '/team-game-hub/background/background2.png',
-      '/team-game-hub/background/background3.png',
+      "/team-game-hub/background/background1.png",
+      "/team-game-hub/background/background2.png",
+      "/team-game-hub/background/background3.png",
+      "/team-game-hub/background/background4.png",
+      "/team-game-hub/background/background5.png",
     ];
     setBackgrounds(backgroundImages);
   }, []);
@@ -25,10 +27,10 @@ const Background: React.FC = () => {
       }
     };
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
   }, []);
 
@@ -40,7 +42,7 @@ const Background: React.FC = () => {
         await element.requestFullscreen();
       }
     } catch (err) {
-      console.error('Error attempting to enable fullscreen:', err);
+      console.error("Error attempting to enable fullscreen:", err);
     }
   };
 
@@ -72,10 +74,7 @@ const Background: React.FC = () => {
       </Row>
 
       {fullscreenImage && (
-        <div
-          className={styles.fullscreenOverlay}
-          onClick={exitFullscreen}
-        >
+        <div className={styles.fullscreenOverlay} onClick={exitFullscreen}>
           <img src={fullscreenImage} alt="Fullscreen background" />
         </div>
       )}

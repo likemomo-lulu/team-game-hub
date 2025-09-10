@@ -1,0 +1,64 @@
+// 使用与RiddleGame和AddWordGame相同的样式结构
+.container {
+  padding: 24px;
+  width: 100%;
+  margin: 0 auto;
+  // 控制按钮区域样式
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+
+    .actionButtons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .answerSection {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: #f6ffed;
+        border: 1px solid #b7eb8f;
+        border-radius: 6px;
+        margin-right: 10px;
+
+        .answerLabel {
+          font-weight: 500;
+          color: #52c41a;
+        }
+
+        .answerText {
+          color: #333;
+          font-size: 16px;
+        }
+      }
+
+      .answerButton {
+        min-width: 100px;
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .container {
+    .controls {
+      .actionButtons {
+        flex-direction: column;
+        gap: 10px;
+
+        .answerSection {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

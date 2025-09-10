@@ -6,6 +6,7 @@ import GuessByAction from "../pages/Games/GuessByAction";
 import AddWordGame from "../pages/Games/AddWordGame";
 import Relay from "../pages/Games/Relay";
 import RiddleGame from "../pages/Games/RiddleGame";
+import CustomGame from "../pages/Games/CustomGame";
 import Teams from "../pages/Teams";
 import BrainTeaserGame from "../pages/Games/BrainTeaserGame";
 
@@ -41,6 +42,10 @@ const router = createHashRouter([
   {
     path: "/brain-teaser-game",
     element: <BrainTeaserGame />,
+  },
+  {
+    path: "/custom-game",
+    element: <CustomGame />,
   },
   {
     path: "/teams",
